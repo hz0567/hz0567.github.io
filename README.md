@@ -1,4 +1,3 @@
-# Personal Website
 
 This is my personal academic website hosted on GitHub Pages. The website contains information about my research, publications, and academic journey.
 
