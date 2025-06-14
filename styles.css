@@ -1,3 +1,6 @@
+/* Import a modern font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 /* Modern CSS Reset */
 * {
     margin: 0;
@@ -7,57 +10,64 @@
 
 /* Variables */
 :root {
-    --primary-color: #2c3e50;
-    --secondary-color: #3498db;
-    --text-color: #333;
-    --background-color: #f8f9fa;
-    --section-padding: 4rem 0;
-    --container-width: 1200px;
+    --primary-color: #1a365d;
+    --accent-color: #2b7cff;
+    --text-color: #222;
+    --background-color: #f6f8fa;
+    --card-bg: #fff;
+    --section-padding: 2.5rem 0 2rem 0;
+    --container-width: 800px;
+    --shadow: 0 2px 16px 0 rgba(44,62,80,0.07);
+    --border-radius: 18px;
 }
 
 /* Base Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #f6f8fa 60%, #eaf1fb 100%);
     color: var(--text-color);
-    background-color: var(--background-color);
+    margin: 0;
+    min-height: 100vh;
 }
 
 .container {
     max-width: var(--container-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 /* Header & Navigation */
 header {
-    background-color: white;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid #e3e8ee;
 }
 
 nav ul {
     display: flex;
     justify-content: center;
+    gap: 2.5rem;
     list-style: none;
-    padding: 1rem 0;
-}
-
-nav ul li {
-    margin: 0 1.5rem;
+    padding: 1.1rem 0 1rem 0;
 }
 
 nav ul li a {
     text-decoration: none;
     color: var(--primary-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    font-size: 1.08rem;
+    letter-spacing: 0.01em;
+    transition: color 0.2s;
+    padding-bottom: 2px;
+    border-bottom: 2px solid transparent;
 }
 
-nav ul li a:hover {
-    color: var(--secondary-color);
+nav ul li a.active, nav ul li a:hover {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
 }
 
 /* Sections */
@@ -80,9 +90,12 @@ h1 {
 }
 
 h2 {
-    font-size: 2rem;
-    border-bottom: 2px solid var(--secondary-color);
-    padding-bottom: 0.5rem;
+    font-size: 1.35rem;
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 1.2rem;
+    border-bottom: 1.5px solid #e3e8ee;
+    padding-bottom: 0.3rem;
     display: inline-block;
 }
 
@@ -94,72 +107,92 @@ h3 {
 /* About Section */
 .about-flex {
     display: flex;
-    align-items: flex-start;
-    gap: 3rem;
+    align-items: center;
+    gap: 2.2rem;
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: var(--border-radius);
+    padding: 2.2rem 2.2rem 2rem 2.2rem;
+    margin-bottom: 2.5rem;
 }
 
 .about-photo {
-    flex: 0 0 180px;
+    flex: 0 0 130px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .about-photo img {
-    width: 180px;
-    height: 180px;
+    width: 130px;
+    height: 130px;
     object-fit: cover;
-    border-radius: 12px;
-    border: 3px solid #e74c3c;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
     background: #fff;
+    box-shadow: 0 2px 8px 0 rgba(44,62,80,0.10);
 }
 
 .about-content {
     flex: 1;
+    min-width: 0;
+}
+
+.about-content h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.2em;
 }
 
 .about-content p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
+    margin-bottom: 0.7em;
+    font-size: 1.08rem;
+    line-height: 1.6;
 }
 
 .contact-links {
-    margin-bottom: 2rem;
+    margin-bottom: 1.1rem;
     display: flex;
-    gap: 1.5rem;
+    gap: 1.2rem;
     flex-wrap: wrap;
 }
 
 .contact-link {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.4rem;
     color: var(--primary-color);
     text-decoration: none;
-    font-size: 1.1rem;
-    transition: color 0.3s ease;
+    font-size: 1.05rem;
+    font-weight: 500;
+    transition: color 0.2s;
 }
 
 .contact-link:hover {
-    color: var(--secondary-color);
+    color: var(--accent-color);
 }
 
 .contact-link i {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
 }
 
 .button {
     display: inline-block;
-    padding: 0.8rem 1.5rem;
-    background-color: var(--secondary-color);
-    color: white;
+    padding: 0.7rem 1.5rem;
+    background-color: var(--accent-color);
+    color: #fff;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.08rem;
+    box-shadow: 0 2px 8px 0 rgba(44,62,80,0.07);
+    transition: background 0.2s;
+    margin-top: 0.2em;
 }
 
 .button:hover {
-    background-color: #2980b9;
+    background: #1a5fd0;
 }
 
 /* News Section */
@@ -177,93 +210,118 @@ h3 {
 
 /* Publications Section */
 .publication-item {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    padding: 1.1rem 1.5rem 1.1rem 1.5rem;
+    margin-bottom: 1.1rem;
+    transition: box-shadow 0.2s;
+}
+
+.publication-item:hover {
+    box-shadow: 0 4px 24px 0 rgba(44,62,80,0.13);
 }
 
 .publication-item h3 {
-    margin-bottom: 0.5rem;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.2em;
 }
 
-.venue {
-    color: #666;
+.publication-item p {
+    margin-bottom: 0.1em;
+    font-size: 0.98rem;
+    color: #444;
+}
+
+.publication-item .venue {
+    color: #6a7a8c;
     font-style: italic;
+    font-size: 0.95rem;
 }
 
 /* Academic Services Section */
 #services ul {
     list-style: none;
-    margin-left: 1rem;
+    margin-left: 0;
+    padding-left: 0;
 }
 
 #services ul li {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.1rem;
+    font-size: 1.01rem;
 }
 
 #services ul li:before {
     content: "•";
-    color: var(--secondary-color);
+    color: var(--accent-color);
     position: absolute;
     left: 0;
 }
 
 /* Awards Section */
 .award-item {
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: 12px;
+    padding: 1.1rem 1.5rem 1.1rem 1.5rem;
+    margin-bottom: 1.1rem;
+    transition: box-shadow 0.2s;
+}
+
+.award-item:hover {
+    box-shadow: 0 4px 24px 0 rgba(44,62,80,0.13);
+}
+
+.award-item h3 {
+    font-size: 1.02rem;
+    color: var(--accent-color);
+    margin-bottom: 0.1em;
+}
+
+.award-item p {
+    font-size: 0.98rem;
+    color: #444;
 }
 
 /* Footer */
 footer {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 2rem 0;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 1.5rem 0 1.2rem 0;
     text-align: center;
+    font-size: 1rem;
+    margin-top: 2.5rem;
+    border-radius: 18px 18px 0 0;
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    nav ul li {
-        margin: 0.5rem 0;
-    }
-
-    .container {
-        padding: 0 1rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h2 {
-        font-size: 1.75rem;
-    }
-
-    h3 {
-        font-size: 1.25rem;
-    }
-}
-
 @media (max-width: 900px) {
     .about-flex {
         flex-direction: column;
         align-items: flex-start;
-        gap: 2rem;
+        gap: 1.5rem;
+        padding: 1.2rem 1.2rem 1.2rem 1.2rem;
     }
     .about-photo {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    .container {
+        padding: 0 0.7rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 0 0.2rem;
+    }
+    .about-flex {
+        padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+    }
+    .publication-item, .award-item {
+        padding: 0.7rem 0.7rem 0.7rem 0.7rem;
     }
 } 
