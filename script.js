@@ -33,4 +33,15 @@ window.addEventListener('scroll', () => {
             link.classList.add('active');
         }
     });
-}); 
+});
+
+// Page view counter
+function updateViewCount() {
+    let count = localStorage.getItem('pageViews') || 0;
+    count = parseInt(count) + 1;
+    localStorage.setItem('pageViews', count);
+    document.getElementById('viewCount').textContent = count;
+}
+
+// Update view count when page loads
+document.addEventListener('DOMContentLoaded', updateViewCount); 

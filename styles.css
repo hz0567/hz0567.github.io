@@ -218,6 +218,23 @@ h3 {
 }
 
 /* Publications Section */
+.year-group {
+    margin-bottom: 2rem;
+}
+
+.year-group:last-child {
+    margin-bottom: 0;
+}
+
+.year-header {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--accent-color);
+    display: inline-block;
+}
+
 .publication-item {
     background: var(--card-bg);
     box-shadow: var(--shadow);
@@ -231,23 +248,37 @@ h3 {
     box-shadow: 0 4px 24px 0 rgba(44,62,80,0.13);
 }
 
+.paper-link-full {
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+}
+
+.paper-link-full:hover {
+    color: inherit;
+    text-decoration: none !important;
+}
+
 .publication-item h3 {
     font-size: 1.08rem;
     font-weight: 600;
     color: var(--primary-color);
     margin-bottom: 0.2em;
+    text-decoration: none;
 }
 
 .publication-item p {
     margin-bottom: 0.1em;
     font-size: 0.98rem;
     color: #444;
+    text-decoration: none;
 }
 
 .publication-item .venue {
     color: #6a7a8c;
     font-style: italic;
     font-size: 0.95rem;
+    text-decoration: none;
 }
 
 /* Academic Services Section */
@@ -333,4 +364,14 @@ footer {
     .publication-item, .award-item {
         padding: 0.7rem 0.7rem 0.7rem 0.7rem;
     }
+}
+
+.view-counter {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#viewCount {
+    font-weight: 600;
 } 
