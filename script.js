@@ -45,6 +45,3 @@ function updateViewCount() {
 
 // Update view count when page loads
 document.addEventListener('DOMContentLoaded', updateViewCount); 
-
-// Uncomment this line if you want to show visitor location:
-// document.addEventListener('DOMContentLoaded', showVisitorDetails);
