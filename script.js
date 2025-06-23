@@ -35,13 +35,79 @@ window.addEventListener('scroll', () => {
     });
 });
 
-// Page view counter
+// IP-based view counter using CountAPI
 function updateViewCount() {
-    let count = localStorage.getItem('pageViews') || 0;
-    count = parseInt(count) + 1;
-    localStorage.setItem('pageViews', count);
-    document.getElementById('viewCount').textContent = count;
+    // First, check if this IP has been recorded for this session
+    const sessionKey = 'visitRecorded';
+    if (sessionStorage.getItem(sessionKey)) {
+        // Already counted this visit in this session, just display the count
+        getLatestCount();
+        return;
+    }
+    
+    // Mark this session as counted
+    sessionStorage.setItem(sessionKey, 'true');
+    
+    // Define namespace and key for CountAPI
+    const namespace = 'hongzhengyang'; // Use your name as namespace
+    const key = 'website-visits';
+    
+    // Increment the counter and update the display
+    fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('viewCount').textContent = data.value;
+        })
+        .catch(error => {
+            console.error('Error updating view count:', error);
+            // Fallback to getting the current count without incrementing
+            getLatestCount();
+        });
 }
 
-// Update view count when page loads
-document.addEventListener('DOMContentLoaded', updateViewCount); 
+// Get the latest count without incrementing (for repeat visitors in same session)
+function getLatestCount() {
+    const namespace = 'hongzhengyang';
+    const key = 'website-visits';
+    
+    fetch(`https://api.countapi.xyz/get/${namespace}/${key}`)
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('viewCount').textContent = data.value || 0;
+        })
+        .catch(error => {
+            console.error('Error fetching view count:', error);
+            document.getElementById('viewCount').textContent = '?';
+        });
+}
+
+// Run view counter when page loads
+document.addEventListener('DOMContentLoaded', updateViewCount);
+
+// Optional: Display viewer location data 
+function showVisitorDetails() {
+    // Create an element to display IP info if you want to show it
+    const infoElement = document.createElement('div');
+    infoElement.className = 'visitor-info';
+    infoElement.style.fontSize = '0.8rem';
+    infoElement.style.marginTop = '5px';
+    infoElement.textContent = 'Loading visitor information...';
+    
+    // Insert after view counter
+    const viewCounter = document.querySelector('.view-counter');
+    viewCounter.appendChild(infoElement);
+    
+    // Get visitor info using a free IP API
+    fetch('https://ipapi.co/json/')
+        .then(response => response.json())
+        .then(data => {
+            infoElement.textContent = `Visitor from: ${data.city || ''}, ${data.country_name || ''}`;
+        })
+        .catch(error => {
+            infoElement.textContent = 'Visitor information unavailable';
+            console.error('Error fetching location data:', error);
+        });
+}
+
+// Uncomment this line if you want to show visitor location:
+// document.addEventListener('DOMContentLoaded', showVisitorDetails);
