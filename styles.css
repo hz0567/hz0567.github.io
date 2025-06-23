@@ -375,3 +375,48 @@ footer {
 #viewCount {
     font-weight: 600;
 } 
+
+/* Visitor statistics styling */
+.visitor-stats {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
+}
+
+.view-counter {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+}
+
+.visitor-info {
+    font-size: 0.85rem;
+    color: #aaa;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.visitor-info i {
+    font-size: 14px;
+}
+
+/* Optional: Add this if you want to create a visitor map visualization */
+#visitorMap {
+    margin-top: 10px;
+    height: 100px;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .visitor-stats {
+        text-align: center;
+    }
+    
+    .visitor-info {
+        justify-content: center;
+    }
+}
