@@ -85,29 +85,64 @@ function getLatestCount() {
 document.addEventListener('DOMContentLoaded', updateViewCount);
 
 // Optional: Display viewer location data 
+// Function to show visitor details
 function showVisitorDetails() {
-    // Create an element to display IP info if you want to show it
-    const infoElement = document.createElement('div');
-    infoElement.className = 'visitor-info';
-    infoElement.style.fontSize = '0.8rem';
-    infoElement.style.marginTop = '5px';
-    infoElement.textContent = 'Loading visitor information...';
+    const infoElement = document.getElementById('visitorInfo');
+    infoElement.innerHTML = '<i class="fas fa-globe"></i> Loading visitor information...';
     
-    // Insert after view counter
-    const viewCounter = document.querySelector('.view-counter');
-    viewCounter.appendChild(infoElement);
-    
-    // Get visitor info using a free IP API
+    // Get visitor info
     fetch('https://ipapi.co/json/')
         .then(response => response.json())
         .then(data => {
-            infoElement.textContent = `Visitor from: ${data.city || ''}, ${data.country_name || ''}`;
+            // Create visitor info display with icon
+            let locationText = '';
+            if (data.city && data.country_name) {
+                locationText = `${data.city}, ${data.country_name}`;
+            } else if (data.country_name) {
+                locationText = data.country_name;
+            } else {
+                locationText = 'Location unknown';
+            }
+            
+            infoElement.innerHTML = `<i class="fas fa-map-marker-alt"></i> Visitor from: ${locationText}`;
+            
+            // Optional: If you want to add a tiny map visualization
+            if (data.latitude && data.longitude) {
+                createVisitorMap(data.latitude, data.longitude);
+            }
         })
         .catch(error => {
-            infoElement.textContent = 'Visitor information unavailable';
+            infoElement.innerHTML = '<i class="fas fa-exclamation-circle"></i> Visitor information unavailable';
             console.error('Error fetching location data:', error);
         });
 }
+
+// Optional: Create a small map showing visitor location
+function createVisitorMap(lat, lng) {
+    // You would need to add a map container to your HTML:
+    // <div id="visitorMap"></div>
+    
+    // If you want to add a map, you could use a static map image:
+    const mapContainer = document.createElement('div');
+    mapContainer.id = 'visitorMap';
+    
+    // Create a static map image (using OpenStreetMap)
+    const mapImg = document.createElement('img');
+    mapImg.src = `https://staticmap.openstreetmap.de/staticmap.php?center=${lat},${lng}&zoom=5&size=300x100&markers=${lat},${lng},red`;
+    mapImg.alt = "Visitor location map";
+    mapImg.style.width = "100%";
+    mapImg.style.height = "100%";
+    mapImg.style.objectFit = "cover";
+    
+    mapContainer.appendChild(mapImg);
+    document.querySelector('.visitor-stats').appendChild(mapContainer);
+}
+
+// Run visitor details when page loads (after the counter)
+document.addEventListener('DOMContentLoaded', function() {
+    updateViewCount();
+    setTimeout(showVisitorDetails, 500); // Slight delay to load counter first
+});
 
 // Uncomment this line if you want to show visitor location:
 // document.addEventListener('DOMContentLoaded', showVisitorDetails);
